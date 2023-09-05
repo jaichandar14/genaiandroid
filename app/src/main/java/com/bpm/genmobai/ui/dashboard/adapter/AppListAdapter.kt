@@ -47,15 +47,12 @@ class AppListAdapter(var context: Context) :
     override fun onBindViewHolder(holder: ParentViewHolder, position: Int) {
         // Initialize child recycler view which show the permission list
         mInitializeChildRecycler(holder)
-        Log.d("TAG", "onBindViewHolder: 1")
         holder.childRecyclerView.visibility = View.GONE
         if (onMini) {
             pos = null
-            Log.d("TAG", "onBindViewHolder: 2")
             holder.onBind(appNameIcon.entries.toList()[position], position, pos, appNameIcon)
             onMini = false
         } else {
-            Log.d("TAG", "onBindViewHolder: 21")
             holder.onBind(appNameIcon.entries.toList()[position], position, pos, appNameIcon)
 
         }
@@ -98,17 +95,12 @@ class AppListAdapter(var context: Context) :
         ) {
 
             if (pos == position) {
-                Log.d("TAG", "onBindViewHolder: 15")
-                Log.d("TAG", "onBind: ${appNameIcon}")
-                Log.d("TAG", "onBindViewHolder: 12")
-                childRecyclerView.visibility = View.VISIBLE
+               childRecyclerView.visibility = View.VISIBLE
                 if (childRecyclerView.visibility == View.VISIBLE) {
-                    Log.d("TAG", "onBindViewHolder: 13")
 
                     add.setImageResource(R.drawable.ic_baseline_minimize_24)
                     mAdapterPermissionList.refreshItems(permStatus, packageId, position)
                 } else {
-                    Log.d("TAG", "onBindViewHolder: 14")
 //                    pos = null
 
                 } //
@@ -121,10 +113,8 @@ class AppListAdapter(var context: Context) :
 
             nameLayout.setOnClickListener {
                 if (childRecyclerView.visibility == View.GONE) {
-                    Log.d("TAG", "onBindViewHolder: 16")
                     callBackInterface?.onClickAppName(parentItemTitle.text as String, position)
                 } else {
-                    Log.d("TAG", "onBindViewHolder: 17")
                     add.setImageResource(R.drawable.ic_baseline_add_24)
                     childRecyclerView.visibility = View.GONE
 //                    onMini = true
@@ -136,7 +126,6 @@ class AppListAdapter(var context: Context) :
                     permStatus, packageId,
                     appPostionOnClick!!, permissionPostionOnClick, prompt, privacyPolicyUrl
                 )
-                Log.d("TAG", "onBindViewHolder: 15")
                 appPostionOnClick = null
                 permissionPostionOnClick = null
 
@@ -156,23 +145,9 @@ class AppListAdapter(var context: Context) :
         nameIcon: HashMap<String, Drawable>,
         onRefresh: Int
     ) {
-        Log.d("TAG", "refreshItems: $nameIcon")
         appNameIcon.clear()
         appNameIcon.putAll(nameIcon)
         this.onRefresh = onRefresh
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun refreshItems1(
-        nameIcon: HashMap<String, Drawable>,
-        onRefresh: Int,
-        b: Boolean
-    ) {
-        appNameIcon.clear()
-        appNameIcon.putAll(nameIcon)
-        this.namePos = onRefresh
-        onMini = b
         notifyDataSetChanged()
     }
 
@@ -205,23 +180,6 @@ class AppListAdapter(var context: Context) :
         this.appPostionOnClick = appNamePosition
         this.permissionPostionOnClick = permissionPos
         this.privacyPolicyUrl = privacyPolicyUrl
-        Log.d(
-            "TAG",
-            "refreshPermissionDetailsUi: promtpt:$responseDTO apppos:$appNamePosition permpos:$permissionPos"
-        )
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun filterAppRefresh(
-        filteredlist: java.util.HashMap<String, Drawable>,
-        isFilter: Boolean,
-
-        ) {
-
-        this.filter = isFilter
-        this.filterNameIcon.clear()
-        this.filterNameIcon.putAll(filteredlist)
         notifyDataSetChanged()
     }
 
