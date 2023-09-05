@@ -89,26 +89,9 @@ class PermissionListAdapter(var context: Context) :
                 packageId,
                 appNamePosition
             )
-//            if (isToggled) {
-//                // Toggle off animation
-//                val animation =
-//                    AnimationUtils.loadAnimation(holder.toggle.context, R.anim.toogle_off)
-//                holder.toggle.startAnimation(animation)
-//                holder.toggle.setImageResource(R.drawable.ic_baseline_toggle_on_24)
-//            } else {
-//                // Toggle on animation
-//                val animation =
-//                    AnimationUtils.loadAnimation(holder.toggle.context, R.anim.toogle_on)
-//                holder.toggle.startAnimation(animation)
-//                holder.toggle.setImageResource(R.drawable.ic_baseline_toggle_off_24)
-//            }
-//            isToggled = !isToggled
+
         }
-        // For the created instance, set title.
-        // No need to set the image for
-        // the ImageViews because we have
-        // provided the source for the images
-        // in the layout file itself
+
         holder.viewMore.setOnClickListener {
             if (holder.userTerm.visibility == View.GONE) {
 
@@ -171,19 +154,9 @@ class PermissionListAdapter(var context: Context) :
 
 
     override fun getItemCount(): Int {
-        // This method returns the number
-        // of items we have added
-        // in the childItemList
-        // i.e. the number of instances
-        // of the childItemList
-        // that have been created
         return permStatus.size
     }
 
-    // This class is to initialize
-    // the Views present
-    // in the child RecyclerView
-    // Define the JavaScript interface
 
     inner class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val childItemTitle: TextView = itemView.findViewById(R.id.user_name_et)

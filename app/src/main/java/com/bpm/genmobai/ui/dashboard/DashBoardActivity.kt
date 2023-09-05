@@ -15,13 +15,11 @@ import com.bpm.genmobai.R
 import com.bpm.genmobai.app.base.BaseActivity
 import com.bpm.genmobai.app.base.MyApplication
 import com.bpm.genmobai.databinding.ActivityDashBoardBinding
-import com.bpm.genmobai.di.dagger2.retrofit.RetrofitHelper
 import com.bpm.genmobai.ui.dashboard.adapter.AppListAdapter
 import com.bpm.genmobai.utility.CustomDialog
 import com.bpm.genmobai.utility.CustomSpinnerAdapter
 import com.bpm.genmobai.utility.PermissionValidation
 import retrofit2.Call
-import retrofit2.Retrofit
 import retrofit2.http.*
 
 
@@ -96,11 +94,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), DashBoardViewModel
     private fun onClickSend() {
         binding.send.setOnClickListener {
             var prompt = binding.etPrompt.text.toString()
-            Log.d(
-                TAG, "onCreate:${
-                    binding.etPrompt.text.toString()
-                }"
-            )
             viewModel.showLoading.value = true
             viewModel.makeApiRequest(
                 "tell me the app name and permission name  if app name is not mention tell me the permission name from this sentence .The sentence is \"\"\" $prompt\"\"\"",
@@ -160,7 +153,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), DashBoardViewModel
         permissionPos: Int?,
         privacyPolicyUrl: String
     ) {
-        Log.d(TAG, "refreshPermissionDetailsUi: 123")
         mAdapterAppList.refreshPermissionDetailsUi(
             responseDTO,
             appNamePosition,
@@ -190,7 +182,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), DashBoardViewModel
     override fun filterSearch(
         listOfAppIcon: HashMap<String, Drawable>
     ) {
-        Log.d(TAG, "filterSearch: $listOfAppIcon")
         mAdapterAppList.refreshItems(listOfAppIcon, 1)
     }
 
@@ -208,9 +199,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), DashBoardViewModel
         packageId: ApplicationInfo,
         appNamePosition: Int?
     ) {
-        Log.d(TAG, "onClickViewMore: 123")
-
-        var retrofitHelper = RetrofitHelper(Retrofit.Builder())
+//        Log.d(TAG, "onClickViewMore: 123")
+//
+//        var retrofitHelper = RetrofitHelper(Retrofit.Builder())
         viewModel.permissionDetailsApi(text, packageId, position, appNamePosition)
     }
 
@@ -257,7 +248,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), DashBoardViewModel
     data class Choice(val message: Message)
 
     override fun settingsBtn(appNameIcon: Boolean, packageId: ApplicationInfo) {
-        Log.d(TAG, "settingsBtn: redirecting")
         val intent = Intent()
         intent.action = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
         intent.data = Uri.parse("package:${packageId.packageName}")

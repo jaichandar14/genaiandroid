@@ -35,10 +35,6 @@ abstract class BaseViewModel : ViewModel() {
     val TAG: String = this.javaClass.simpleName
     val disposables = CompositeDisposable()
     var observable = MutableLiveData<Observable<ResponseDTO>>()
-
-    //    var observable1 = MutableLiveData<Observable<String>>()
-    //var observable1 = MutableLiveData<Observable<List<ResponseDTO>>>()
-    var responsesAI = String()
     var bindingRoot = MutableLiveData<ViewDataBinding>()
 
     @Inject
