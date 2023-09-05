@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">GenMobAI</string>
+    <string name="gen_ai_mobile">Gen AI Mobile</string>
+    <string name="get_started">Get Started</string>
+
+    // base viewmodel error
+    <string name="server_not_found">Server not found</string>
+    <string name="time_out_error">Time out error, try after sometime.</string>
+    <string name="service_not_available">Service not available, try again later.</string>
+    <string name="internal_server_error">Internal server error</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="too_many_request">Too many request, Please try after few seconds.</string>
+    <string name="invalid_credential">Invalid credential</string>
+    <string name="unAuthorised_request">Un Authorised request</string>
+    <string name="login">Login</string>
+    <string name="_androidx_security_master_key_">_androidx_security_master_key_</string>
+    <string name="gen_ai_mobile_titlr">Gen Ai Mobile</string>
+    <string name="permissions">Permissions :</string>
+    <string name="logo">Logo</string>
+    <string name="title">Title</string>
+</resources>
