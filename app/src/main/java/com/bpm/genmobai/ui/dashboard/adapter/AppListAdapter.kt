@@ -47,12 +47,15 @@ class AppListAdapter(var context: Context) :
     override fun onBindViewHolder(holder: ParentViewHolder, position: Int) {
         // Initialize child recycler view which show the permission list
         mInitializeChildRecycler(holder)
+        Log.d("TAG", "onBindViewHolder: 1")
         holder.childRecyclerView.visibility = View.GONE
         if (onMini) {
             pos = null
+            Log.d("TAG", "onBindViewHolder: 2")
             holder.onBind(appNameIcon.entries.toList()[position], position, pos, appNameIcon)
             onMini = false
         } else {
+            Log.d("TAG", "onBindViewHolder: 21")
             holder.onBind(appNameIcon.entries.toList()[position], position, pos, appNameIcon)
 
         }
@@ -86,7 +89,6 @@ class AppListAdapter(var context: Context) :
         val parentItemTitle: TextView = itemView.findViewById(R.id.app_name)
         val childRecyclerView: RecyclerView = itemView.findViewById(R.id.innerRecyclerView)
         val nameLayout: ConstraintLayout = itemView.findViewById(R.id.app_name_layout)
-
         fun onBind(
             appNameIcon: MutableMap.MutableEntry<String, Drawable>,
             position: Int,
@@ -95,12 +97,17 @@ class AppListAdapter(var context: Context) :
         ) {
 
             if (pos == position) {
-               childRecyclerView.visibility = View.VISIBLE
+                Log.d("TAG", "onBindViewHolder: 15")
+                Log.d("TAG", "onBind: ${appNameIcon}")
+                Log.d("TAG", "onBindViewHolder: 12")
+                childRecyclerView.visibility = View.VISIBLE
                 if (childRecyclerView.visibility == View.VISIBLE) {
+                    Log.d("TAG", "onBindViewHolder: 13")
 
                     add.setImageResource(R.drawable.ic_baseline_minimize_24)
                     mAdapterPermissionList.refreshItems(permStatus, packageId, position)
                 } else {
+                    Log.d("TAG", "onBindViewHolder: 14")
 //                    pos = null
 
                 } //
@@ -113,11 +120,13 @@ class AppListAdapter(var context: Context) :
 
             nameLayout.setOnClickListener {
                 if (childRecyclerView.visibility == View.GONE) {
+                    Log.d("TAG", "onBindViewHolder: 16")
                     callBackInterface?.onClickAppName(parentItemTitle.text as String, position)
                 } else {
+                    Log.d("TAG", "onBindViewHolder: 17")
                     add.setImageResource(R.drawable.ic_baseline_add_24)
                     childRecyclerView.visibility = View.GONE
-//                    onMini = true
+                    onMini = true
                 }
             }
             if (appPostionOnClick == position) {
@@ -126,6 +135,7 @@ class AppListAdapter(var context: Context) :
                     permStatus, packageId,
                     appPostionOnClick!!, permissionPostionOnClick, prompt, privacyPolicyUrl
                 )
+                Log.d("TAG", "onBindViewHolder: 15")
                 appPostionOnClick = null
                 permissionPostionOnClick = null
 

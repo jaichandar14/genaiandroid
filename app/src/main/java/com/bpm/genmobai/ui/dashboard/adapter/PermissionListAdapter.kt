@@ -114,10 +114,11 @@ class PermissionListAdapter(var context: Context) :
             holder.userTerm.visibility = View.VISIBLE
 
 //            val text = findViewById(R.id.text_login) as TextVi
-            holder.userTerm.text = holder.fromHtml(
-                "Terms of Use:\n<p>$prompt.To view terms of use.click this link " +
-                        "<span style=\"color: blue;\">$privacyPolicyUrl</span></p>"
-            )
+            holder.userTerm.text =
+                holder.fromHtml(
+                    "Terms of Use:\n<p>$prompt.To view terms of use.click this link<br>" +
+                            "<span style=\"color: blue;\">$privacyPolicyUrl</span></p>"
+                )
 //            appNamePosition=null
 //            permissionPosition=null
         }

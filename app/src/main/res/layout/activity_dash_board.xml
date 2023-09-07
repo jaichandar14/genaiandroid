@@ -12,10 +12,6 @@
             type="com.bpm.genmobai.ui.dashboard.DashBoardViewModel" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_down"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,7 +85,7 @@
 
                 <TextView
                     android:id="@+id/user_details"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_18sdp"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -100,9 +96,22 @@
                     android:textSize="@dimen/_16ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
+
+                <ImageView
+                    android:id="@+id/reload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/refresh"
+                    app:layout_constraintBottom_toBottomOf="@+id/user_details"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/user_details"
+                    app:layout_constraintTop_toTopOf="@+id/user_details" />
 
                 <Spinner
                     android:id="@+id/spinner"
@@ -196,5 +205,4 @@
                 app:layout_constraintGuide_percent="1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
