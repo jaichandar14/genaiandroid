@@ -109,6 +109,7 @@ class DashBoardViewModel : BaseViewModel() {
         packageManager: PackageManager,
         binding: ActivityDashBoardBinding
     ): ArrayList<ApplicationInfo> {
+        Log.d(TAG, "filterPerBased: $status")
         var appNameList = ArrayList<ApplicationInfo>()
         for (appInfo in appsList) {
             try {
@@ -149,7 +150,8 @@ class DashBoardViewModel : BaseViewModel() {
                         }
 
                     }
-                    "C0" -> {
+
+                    "CO" -> {
 //                        binding.listOfPermission.visibility=View.GONE
 //                        binding.userDataList.visibility = View.VISIBLE
                         if (appPermissions?.contains(Manifest.permission.WRITE_CONTACTS) == true || appPermissions?.contains(
@@ -169,8 +171,10 @@ class DashBoardViewModel : BaseViewModel() {
                                 binding.userDetails.text =
                                     "Contact Permission ${appNameList.size}"
 
-//
+                                Log.d(TAG, "filterPerBased:error ")
                             }
+                        } else {
+                            Log.d(TAG, "filterPerBased:$appNameList ")
                         }
                     }
                     "STORAGE" -> {
@@ -298,7 +302,7 @@ class DashBoardViewModel : BaseViewModel() {
 
     override fun onError(throwable: Throwable) {
         super.onError(throwable)
-        Log.d(TAG, "onSuccessError: $throwable")
+        Log.d(TAG, "onSuccessError: ${throwable.message}")
     }
 
     private fun PackageManager.getPackageInfoCompat(
@@ -401,6 +405,7 @@ class DashBoardViewModel : BaseViewModel() {
             callBackInterface?.permissionType("C", appsList)
         } else if (generatedResponse.contains("contact") || generatedResponse.contains("contacts")
         ) {
+            Log.d(TAG, "filterPermission: CO")
             callBackInterface?.permissionType("CO", appsList)
         } else if (generatedResponse.contains("storage") || generatedResponse.contains(
                 "file"

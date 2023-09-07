@@ -19,6 +19,11 @@ import com.bpm.genmobai.ui.dashboard.adapter.AppListAdapter
 import com.bpm.genmobai.utility.CustomDialog
 import com.bpm.genmobai.utility.CustomSpinnerAdapter
 import com.bpm.genmobai.utility.PermissionValidation
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -59,8 +64,16 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), DashBoardViewModel
             mInstalledAppId.addAll(it)
 
         })
-        binding.swipeDown.setOnRefreshListener {
+        binding.reload.setOnClickListener {
+            viewModel.showLoading.value = true
             startActivity(Intent(this, DashBoardActivity::class.java))
+            GlobalScope.launch(Dispatchers.IO) {
+                delay(3500.toLong())
+                withContext(Dispatchers.Main) {
+                    viewModel.showLoading.value = false
+                }
+                // Place your task here
+            }
         }
         // Create a list of CustomSpinnerItem objects
         val items = listOf(
@@ -187,6 +200,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), DashBoardViewModel
 
     // ON click app name call back
     override fun onClickAppName(text: String, position: Int) {
+        mAppListRecyclerView.layoutManager?.scrollToPosition(position)
         var packageId = viewModel.fetchPackedIDFromName(text, this)
         val appPermissions = mutableListOf<String>()
         var permList = PermissionValidation.permissionValidation(this, packageId)

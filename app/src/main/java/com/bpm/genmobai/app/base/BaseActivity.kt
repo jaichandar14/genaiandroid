@@ -3,6 +3,7 @@ package com.bpm.genmobai.app.base
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.ViewDataBinding
 import com.bpm.genmobai.utility.MyToast
 import com.bpm.genmobai.utility.SnackBar
@@ -39,6 +40,8 @@ abstract class BaseActivity<T : BaseViewModel> : AppActivity() {
         super.onPostCreate(savedInstanceState)
         // Set Status bar
         observer()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
     }
 
 
